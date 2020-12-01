@@ -8,6 +8,7 @@ part1 = show . findTarget 2020 2 . map read . lines
 part2 :: String -> String
 part2 = show . findTarget 2020 3 . map read . lines
 
+-- |Finds lists of specified length that sum to a target
 findTarget :: Int -> Int -> [Int] -> Maybe [Int]
 findTarget t len inp = case sums t len $ sort inp of
     (x:_) -> Just x
