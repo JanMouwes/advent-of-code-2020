@@ -2,22 +2,19 @@ module Day_1.SumExpenses where
 
 import Data.List
 
--- Part 1
-find2020' :: String -> (Int, Int)
-find2020' = find2020' . map read . lines
+part1 :: String -> String
+part1 = show . findTarget 2020 2 . map read . lines
 
-find2020 :: [Int] -> (Int, Int)
-find2020 (n:ns) = case filter (==(2020-n)) ns of
-    (x:_) -> (n, x)
-    [] -> find2020 ns
+part2 :: String -> String
+part2 = show . findTarget 2020 3 . map read . lines
 
--- Part 2
-find2020s' :: String -> (Int, Int, Int)
-find2020s' ns = case find2020s $ map read $ lines ns of
-    (Just x) -> x
-    Nothing -> (0, 0, 0)
-
-find2020s :: [Int] -> Maybe (Int, Int, Int)
-find2020s ns = case filter (\l -> length l == 3 && sum l == 2020) $ subsequences $ sort ns of
-    ((x:y:z:_):_) -> Just (x, y, z)
-    [] -> Nothing
+findTarget :: Int -> Int -> [Int] -> Maybe [Int]
+findTarget t len inp = case sums t len $ sort inp of
+    (x:_) -> Just x
+    _ -> Nothing
+    where 
+        sums :: Int -> Int -> [Int] -> [[Int]]
+        sums t 1 ns = map (:[]) $ filter (==t) ns
+        sums t len inp = 
+            let os n ns = sums (t-n) (len-1) (filter (/= n) ns)
+            in concatMap (\n -> map (n:) (os n inp)) inp
