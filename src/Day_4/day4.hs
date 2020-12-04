@@ -23,19 +23,20 @@ inRange n (lower, upper) = n >= lower && n <= upper
 strInRange :: String -> (Int, Int) -> Bool
 strInRange n rng = (read n :: Int) `inRange` rng
 
+-- Check if valid hex colour, without regex
 isColour :: String -> Bool
 isColour ('#':rest) = all (\c -> isDigit c || c `elem` "abcdef") rest 
 isColour _ = False
 
 isHeight :: String -> Bool
-isHeight s = go (takeWhile isDigit s, dropWhile isDigit s)
+isHeight s = go $ span isDigit s
     where 
         go (n, "cm") = n `strInRange` (150, 193)
         go (n, "in") = n `strInRange` (59, 76)
         go _ = False
 
 isValid :: [(String, String)] -> Bool
-isValid els = fromMaybe False $ (do
+isValid els = Just True == do
     byr <- "byr" `lookup` els
     iyr <- "iyr" `lookup` els
     eyr <- "eyr" `lookup` els
@@ -50,16 +51,15 @@ isValid els = fromMaybe False $ (do
                 && isColour hcl
                 && ecl `elem` ["amb", "blu", "brn", "gry", "grn", "hzl", "oth"]
                 && length pid == 9 && all isDigit pid 
-    return valid)
+    return valid
 
-splitNewlines :: String -> [String]
-splitNewlines = go . lines 
+parsePassports :: String -> [String]
+parsePassports = go . lines 
     where 
         go :: [String] -> [String]
         go [ln] = [ln]
-        go (ln:"":lns) = ln : go lns
+        go (ln:"":lns) = ln : go lns --Text followed by blank line
         go (ln:nln:lns) = go (unwords [ln, nln] : lns)
-
 
 splitOnFirst :: (a -> Bool) -> [a] -> ([a], [a])
 splitOnFirst p xs = (takeWhile (not . p) xs, drop 1 $ dropWhile (not . p) xs)
