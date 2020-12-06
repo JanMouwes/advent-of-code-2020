@@ -1,4 +1,4 @@
-module QuestionCounter where
+module Day_6.QuestionCounter where
 
 import Data.List
 

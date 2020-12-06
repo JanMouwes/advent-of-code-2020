@@ -1,4 +1,4 @@
-module SeatFinder where
+module Day_5.SeatFinder where
 
 import Data.List
 

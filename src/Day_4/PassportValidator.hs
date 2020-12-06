@@ -1,4 +1,4 @@
-module PassportValidator where
+module Day_4.PassportValidator where
 
 import Data.Maybe
 import Data.Char
