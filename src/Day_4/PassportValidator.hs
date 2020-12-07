@@ -6,11 +6,11 @@ import Data.Char
 expectedFields :: [String]
 expectedFields = ["byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid", "cid"]
 
-part1 :: String -> Int
-part1 = length . filter hasAllExpected . map scan . splitNewlines
+-- part1 :: String -> Int
+-- part1 = length . filter hasAllExpected . map scan . splitNewlines
 
-part2 :: String -> Int
-part2 = length . filter isValid . map scan . splitNewlines
+-- part2 :: String -> Int
+-- part2 = length . filter isValid . map scan . splitNewlines
 
 hasAllExpected :: [(String, String)] -> Bool
 hasAllExpected els = 
