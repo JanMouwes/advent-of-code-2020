@@ -12,19 +12,16 @@ main = do
     putStrLn $ part2 input
     return ()
 
-startExecution :: [Instruction] -> Maybe (Int, Int, [Int])
-startExecution x = executeInstructions x [] 0 0
-
 part1 :: String -> String
-part1 inp = show $ startExecution $ map parseInstruction $ lines inp
+part1 = show . startExecution . map parseInstruction . lines
 
 part2 :: String -> String
 part2 inp = 
     let instructions = map parseInstruction $ lines inp
-        Just (index, acc, stack) = startExecution instructions
+        Just (_, _, stack) = startExecution instructions
     in show 
        $ maximumBy (\(_, _, x:_)(_, _, y:_) -> x `compare` y) 
-       $ mapMaybe (startExecution . (`swapInstruction` instructions))   stack
+       $ mapMaybe (startExecution . (`swapInstruction` instructions)) stack
 
 swapInstruction :: Int -> [Instruction] -> [Instruction]
 swapInstruction i instrs = 
@@ -39,6 +36,9 @@ parseInstruction :: String -> Instruction
 parseInstruction str = 
     let [ins, arg] = words str
     in (ins, read $ filter (/='+') arg)
+
+startExecution :: [Instruction] -> Maybe (Int, Int, [Int])
+startExecution x = executeInstructions x [] 0 0
 
 executeInstructions :: [Instruction] -> [Int] -> Int -> Int -> Maybe (Int, Int, [Int])
 executeInstructions instrs prevs index acc 
