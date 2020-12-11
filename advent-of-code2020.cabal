@@ -28,7 +28,8 @@ executable advent-of-code2020
     Day_6.QuestionCounter,
     Day_7.LuggageProcessor,
     Day_8.InstructionCorrection,
-    Day_9.XMASCracker
+    Day_9.XMASCracker,
+    Day_10.AdapterCounter
   -- other-extensions:
   build-depends:       
     base >=4.14 && <4.15,
