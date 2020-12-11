@@ -1,8 +1,7 @@
-module Day_11 where
+module Day_11.SeatFinder where
 
-import Data.List
-import Data.Maybe
-import qualified Data.Tree as T
+import Data.Maybe ( mapMaybe )
+import Data.Bifunctor
 import qualified Data.Map as Map
 
 type Instruction = (String, Int)
@@ -19,8 +18,7 @@ instance Show Element where
 main :: IO ()
 main = do 
     input <- readFile "src/Day_11/input.txt"
-    print input
-    -- print $ part1 input
+    print $ part1 input
     print $ part2 input
     return ()
 
@@ -65,10 +63,10 @@ updateUntil p update grid
     | otherwise = updateUntil p update $ update grid
 
 parseGrid :: String -> Grid
-parseGrid = Map.fromList . map (\(coord, c) -> (coord, translateChar c)). concatMap (\(y, l) -> parseLine y l). zip [0..] . lines
+parseGrid = Map.fromList . map (second translateChar) . concatMap (uncurry parseLine). zip [0..] . lines
     where
         parseLine :: Int -> String -> [(Coordinate, Char)]
-        parseLine y = map (\(x, c) -> ((y, x), c)) . zip [0..]
+        parseLine y = zipWith (\x c -> ((y, x), c)) [0..]
         translateChar :: Char -> Element
         translateChar '.' = Floor
         translateChar 'L' = Empty
@@ -85,13 +83,13 @@ add :: Coordinate -> Coordinate -> Coordinate
 add (x1, y1)(x2, y2) = (x1+x2, y1+y2)
 
 visibleFrom :: Coordinate -> Grid -> [(Coordinate, Element)]
-visibleFrom c@(x, y) grid = 
+visibleFrom c grid = 
     let dirs = neighboursFor (0, 0)
         findSeat c d g = 
             let newC = c `add` d
             in case newC `Map.lookup` g of
                 (Just el) -> case el of
-                    (Floor) -> findSeat newC d g
+                    Floor -> findSeat newC d g
                     _ -> Just (newC, el)
                 Nothing -> Nothing
     in mapMaybe (\d -> findSeat c d grid) dirs
