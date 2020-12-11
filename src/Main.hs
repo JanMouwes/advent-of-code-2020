@@ -1,6 +1,6 @@
 module Main where
 
-import qualified Day_7.LuggageProcessor as Day_7
+import qualified Day_10.AdapterCounter as Day_10
 
 main :: IO ()
-main = Day_7.main
+main = Day_10.main
