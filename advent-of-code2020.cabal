@@ -20,6 +20,7 @@ extra-source-files:  CHANGELOG.md
 executable advent-of-code2020
   main-is:             Main.hs
   other-modules:
+    Utils.List,
     Day_1.SumExpenses,
     Day_2.PasswordValidator,
     Day_3.TreeTrajectory,
