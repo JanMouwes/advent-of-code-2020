@@ -33,6 +33,7 @@ executable advent-of-code2020
     Day_10.AdapterCounter,
     Day_11.SeatFinder,
     Day_12.NavigationSystem,
+    Day_13.BusTimeFinder,
     Day_14.MemoryCommandProcessor
   -- other-extensions:
   build-depends:       
