@@ -34,7 +34,8 @@ executable advent-of-code2020
     Day_11.SeatFinder,
     Day_12.NavigationSystem,
     Day_13.BusTimeFinder,
-    Day_14.MemoryCommandProcessor
+    Day_14.MemoryCommandProcessor,
+    Day_16.TicketLabeler
   -- other-extensions:
   build-depends:       
     base >=4.14 && <4.15,

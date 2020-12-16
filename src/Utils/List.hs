@@ -33,3 +33,9 @@ splitOnElement xs x = foldr f [[]] xs
         f el (r:rs) 
             | el == x = []:r:rs
             | otherwise = (el:r):rs
+
+compareBy :: Ord b => (a -> b) -> a -> a -> Ordering
+compareBy f x y = f x `compare` f y
+
+without :: Ord a => [a] -> [a] -> [a]
+without xs ys = filter (`notElem` ys) xs
