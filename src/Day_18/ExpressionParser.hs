@@ -12,9 +12,6 @@ main = do
     let (Right testInput) = testParseResult
         (Right input) = parseResult
 
-    putStrLn $ unlines $ map show testInput
-    putStrLn $ unlines $ map (show . addParens) testInput
-
     print "Part 1:"
     print $ part1 testInput
     print $ part1 input
