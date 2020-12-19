@@ -37,6 +37,7 @@ executable advent-of-code2020
     Day_14.MemoryCommandProcessor,
     Day_16.TicketLabeler,
     Day_17.EnergyCalculator,
+    Day_18.ExpressionParser,
     Day_19.MonsterMessages
   -- other-extensions:
   build-depends:       
