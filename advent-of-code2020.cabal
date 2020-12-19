@@ -36,11 +36,13 @@ executable advent-of-code2020
     Day_13.BusTimeFinder,
     Day_14.MemoryCommandProcessor,
     Day_16.TicketLabeler,
-    Day_17.EnergyCalculator
+    Day_17.EnergyCalculator,
+    Day_19.MonsterMessages
   -- other-extensions:
   build-depends:       
     base >=4.14 && <4.15,
     split,
-    containers
+    containers,
+    parsec
   hs-source-dirs:      src
   default-language:    Haskell2010
