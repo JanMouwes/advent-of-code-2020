@@ -38,7 +38,8 @@ executable advent-of-code2020
     Day_16.TicketLabeler,
     Day_17.EnergyCalculator,
     Day_18.ExpressionParser,
-    Day_19.MonsterMessages
+    Day_19.MonsterMessages,
+    Day_22.CrabCombat
   -- other-extensions:
   build-depends:       
     base >=4.14 && <4.15,
